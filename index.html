@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eletrostática - Halliday Vol. 3</title>
+    <style>
+        /* Reset e estilos globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cambria', 'Times New Roman', serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Cabeçalho estilo livro didático */
+        header {
+            background: linear-gradient(135deg, #1a3e8c, #2a56c6);
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+            border-bottom: 4px solid #f1c40f;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        header p {
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+        
+        /* Navegação */
+        nav {
+            background-color: #2c3e50;
+            padding: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+        
+        nav a:hover {
+            background-color: #f1c40f;
+            color: #2c3e50;
+            border-color: #2c3e50;
+        }
+        
+        /* Conteúdo principal */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+        
+        @media (min-width: 992px) {
+            .container {
+                grid-template-columns: 3fr 1fr;
+            }
+        }
+        
+        /* Cards de conteúdo estilo Halliday */
+        .card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid #1a3e8c;
+        }
+        
+        .card h2 {
+            color: #1a3e8c;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+            font-size: 1.8rem;
+        }
+        
+        .card h3 {
+            color: #2a56c6;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.4rem;
+        }
+        
+        /* Estilo para equações */
+        .equation {
+            background-color: #f8f9fa;
+            border-left: 3px solid #f1c40f;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            overflow-x: auto;
+        }
+        
+        /* Imagem responsiva com legenda */
+        .figure {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .figure img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .figure figcaption {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Barra lateral */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .sidebar-card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            border-top: 3px solid #f1c40f;
+        }
+        
+        .sidebar-card h3 {
+            color: #1a3e8c;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Tabela de fórmulas estilo Halliday */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #1a3e8c;
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        /* Destaques e exemplos */
+        .example {
+            background-color: #f0f7ff;
+            border-left: 4px solid #2a56c6;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .example h4 {
+            color: #1a3e8c;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Responsividade para mobile */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            nav ul {
+                gap: 0.8rem;
+            }
+            
+            nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fundamentos de Eletrostática-Maria</h1>
+        <p>Baseado em Halliday, Resnick & Walker - Fundamentos de Física, Volume 3</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#carga-eletrica">Carga Elétrica</a></li>
+            <li><a href="#lei-coulomb">Lei de Coulomb</a></li>
+            <li><a href="#campo-eletrico">Campo Elétrico</a></li>
+            <li><a href="#potencial-eletrico">Potencial Elétrico</a></li>
+            <li><a href="#aplicacoes">Aplicações</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <main>
+            <section id="carga-eletrica" class="card">
+                <h2>Carga Elétrica e Suas Propriedades</h2>
+                
+                <p>Segundo Halliday, Volume 3, a carga elétrica é uma propriedade intrínseca das partículas elementares que determina suas interações eletromagnéticas.</p>
+                
+                <div class="equation">
+                    q = ne (n = ±1, ±2, ±3,...; e = 1.6 × 10⁻¹⁹ C)
+                </div>
+                
+                <h3>Princípios Fundamentais:</h3>
+                <ul>
+                    <li><strong>Quantização da carga:</strong> A carga elétrica é quantizada, ou seja, existe em múltiplos inteiros da carga elementar e.</li>
+                    <li><strong>Conservação da carga:</strong> A carga total de um sistema isolado permanece constante.</li>
+                    <li><strong>Invariância da carga:</strong> O valor da carga de uma partícula não depende do seu estado de movimento.</li>
+                </ul>
+                
+                <div class="figure">
+                    <img src="https://via.placeholder.com/600x300?text=Figura+22-1+Halliday:+Tipos+de+carga" alt="Tipos de carga elétrica">
+                    <figcaption>Figura 22-1: Atração e repulsão entre cargas elétricas (Halliday, Resnick & Walker)</figcaption>
+                </div>
+            </section>
+            
+            <section id="lei-coulomb" class="card">
+                <h2>Lei de Coulomb</h2>
+                
+                <p>A força eletrostática entre duas partículas carregadas em repouso é dada por:</p>
+                
+                <div class="equation">
+                    F = k |q₁q₂|/r² (k = 8.99 × 10⁹ N·m²/C²)
+                </div>
+                
+                <p>Onde:</p>
+                <ul>
+                    <li>F é a magnitude da força eletrostática</li>
+                    <li>q₁ e q₂ são as cargas das partículas</li>
+                    <li>r é a distância entre as cargas</li>
+                    <li>k é a constante eletrostática</li>
+                </ul>
+                
+                <div class="example">
+                    <h4>Exemplo 21-1 (Halliday):</h4>
+                    <p>Duas cargas puntiformes de +1.0 μC e -2.0 μC estão separadas por 10 cm. Calcule a força eletrostática entre elas.</p>
+                    <p><strong>Solução:</strong> F = (8.99×10⁹)(1.0×10⁻⁶)(2.0×10⁻⁶)/(0.10)² = 1.8 N (atração)</p>
+                </div>
+            </section>
+            
+            <section id="campo-eletrico" class="card">
+                <h2>Campo Elétrico</h2>
+                
+                <p>O campo elétrico E em um ponto do espaço é definido como a força elétrica por unidade de carga que atua sobre uma carga de prova positiva colocada naquele ponto:</p>
+                
+                <div class="equation">
+                    E = F/q₀
+                </div>
+                
+                <h3>Campo de uma Carga Pontual:</h3>
+                <div class="equation">
+                    E = k q/r² (direção radial)
+                </div>
+                
+                <div class="figure">
+                    <img src="https://via.placeholder.com/600x300?text=Figura+22-7+Halliday:+Linhas+de+campo" alt="Linhas de campo elétrico">
+                    <figcaption>Figura 22-7: Linhas de campo elétrico para várias configurações de carga (Halliday)</figcaption>
+                </div>
+                
+                <h3>Dipolo Elétrico:</h3>
+                <p>Um dipolo elétrico consiste em duas cargas iguais e opostas separadas por uma distância d. O momento dipolar elétrico p é:</p>
+                <div class="equation">
+                    p = qd (direção da carga negativa para a positiva)
+                </div>
+            </section>
+        </main>
+        
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3>Capítulos Relacionados (Halliday Vol. 3)</h3>
+                <ul>
+                    <li>Cap. 21 - Carga Elétrica</li>
+                    <li>Cap. 22 - Campos Elétricos</li>
+                    <li>Cap. 23 - Lei de Gauss</li>
+                    <li>Cap. 24 - Potencial Elétrico</li>
+                    <li>Cap. 25 - Capacitância</li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3>Constantes Importantes</h3>
+                <table>
+                    <tr>
+                        <td>Constante eletrostática (k)</td>
+                        <td>8.99×10⁹ N·m²/C²</td>
+                    </tr>
+                    <tr>
+                        <td>Carga elementar (e)</td>
+                        <td>1.602×10⁻¹⁹ C</td>
+                    </tr>
+                    <tr>
+                        <td>Permissividade do vácuo (ε₀)</td>
+                        <td>8.85×10⁻¹² C²/N·m²</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3>Problemas Resolvidos</h3>
+                <p><strong>Problema 21.5:</strong> Três cargas estão alinhadas. Calcule a força resultante na carga central.</p>
+                <p><strong>Problema 22.3:</strong> Determine o campo elétrico no centro de um quadrado com cargas nos vértices.</p>
+                <p><strong>Problema 23.7:</strong> Aplique a Lei de Gauss para uma esfera carregada.</p>
+            </div>
+            
+            <div id="aplicacoes" class="sidebar-card">
+                <h3>Aplicações Tecnológicas</h3>
+                <ul>
+                    <li>Fotocopiadoras</li>
+                    <li>Pintura eletrostática</li>
+                    <li>Filtros eletrostáticos</li>
+                    <li>Microscópios eletrônicos</li>
+                    <li>Para-raios</li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+    
+    <footer>
+        <p>Referência: HALLIDAY, D.; RESNICK, R.; WALKER, J. <em>Fundamentos de Física</em>. Volume 3: Eletromagnetismo. 10ª ed. Rio de Janeiro: LTC, 2016.</p>
+        <p>© 2023 Página Educacional - Não afiliada aos autores ou editora</p>
+    </footer>
+</body>
+</html>
